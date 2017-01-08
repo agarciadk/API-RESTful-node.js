@@ -2,22 +2,17 @@
 // ProductList data array for filling in info box
 var productListData = []
 var userInfo = false
-var e = {}
 // DOM Ready =============================================================
 $(document).ready(() => {
   // Populate the user table on initial page load
   populateTable()
   // Username link click
   $('#productTable table tbody').on('click', 'td a.linkshowProduct', showProductInfo)
-
   // Delete Product link click
-  $('#productTable table tbody').on('click', 'td a.linkdeleteProduct', deleteProduct)
-  $('#linkdeleteProduct').on('click', deleteProduct)
+  $('#linkdeleteProduct').click(deleteProduct)
   // Add Product button click
   $('#addProductForm').submit(addProduct)
-  $('#productTable table tbody').on('click', 'td a.linkupdateProduct', populateUpdateProductForm)
   $('#updateProductForm').submit(updateProduct)
-  $('#productTable table tbody').change(() => { console.log('La tabla ha cambiado') })
 })
 
 // Functions
@@ -53,10 +48,6 @@ function populateTable () {
 function showProductInfo (event) {
   event.preventDefault()
   let thisProductName = $(event.target).attr('rel')
-  // var idToUpdate = $(this).attr('data')
-  console.log(productListData.products.map(function (arrayItem) {
-    return arrayItem.name
-  }).indexOf(thisProductName))
   let arrayPosition = productListData.products.map(function (arrayItem) {
     return arrayItem.name
   }).indexOf(thisProductName)
@@ -70,7 +61,6 @@ function showProductInfo (event) {
   $('#productInfoPath').attr('src', `/images/${thisProductObject.picture}`)
   $('#linkdeleteProduct').attr('rel', thisProductObject._id)
   $('#linkupdateProduct').attr('rel', thisProductObject._id)
-  e = event
 }
 
 function deleteProduct (event) {
@@ -147,19 +137,4 @@ function resetForm (idForm) {
   if ($(`${idForm} select`) !== undefined) {
     $(`${idForm} select`).prop('selectedIndex', 0)
   } else { console.log(`No hay select`) }
-}
-
-function populateUpdateProductForm (event) {
-  event.preventDefault()
-
-  let thisProductId = $(this).attr('rel')
-  let arrayPosition = productListData.products.map(function (arrayItem) { return arrayItem.name }).indexOf(thisProductId)
-  let thisProductObject = productListData.products[arrayPosition]
-  console.log($(thisProductObject))
-
-  $('#productInputName').val(thisProductObject.name)
-  $('#productInputPrice').val(thisProductObject.price)
-  // $('#productInputPhoto').val(thisProductObject.picture)
-  $('#productInputDescription').val(thisProductObject.description)
-  $('#productInputCategory').val(thisProductObject.category)
 }
