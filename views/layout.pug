@@ -1,0 +1,58 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+  body
+    nav(class='navbar navbar-default')
+      div.container-fluid
+        // Brand and toggle get grouped for better mobile display
+        div.navbar-header
+          button(type='button', class='navbar-toggle collapsed', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+            <span class='sr-only'>Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          a.navbar-brand(href='#') Brand
+
+        // Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li.active
+              a(href='/api/') Inicio
+                <span class="sr-only">(current)</span>
+            li
+              a(href='#') Biografia
+            li.dropdown
+              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false') Categorias
+                <span class="caret"></span>
+              ul.dropdown-menu
+                li
+                  a(href='#') Bebes
+                li
+                  a(href='#') Niños
+                li
+                  a(href='#') Mujer
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(role='button', data-toggle='modal', href='#modalSaveProduct')
+                <span class="glyphicon glyphicon-cloud-upload"></span>
+            li.dropdown
+              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                <span class="glyphicon glyphicon-cog"></span>
+                <span class="caret"></span>
+              ul.dropdown-menu
+                li
+                  a(href='#') Perfil
+                li
+                  a(href='#') Ajustes
+                li
+                  a(href='#') Contacto
+                li.divider(role='separator')
+                li
+                  a(href='#') Salir
+
+    block content
+    script(src='/js/jquery-3.1.1.min.js')
+    script(src='/js/bootstrap.min.js')
+    script(src='/js/global.js')
