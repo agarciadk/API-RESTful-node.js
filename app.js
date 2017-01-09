@@ -6,7 +6,7 @@ const path = require('path')
 const app = express()
 
 const api = require('./routes')
-
+const gallery = require('./routes/gallery')
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/api', api)
+app.use('/gallery', gallery)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

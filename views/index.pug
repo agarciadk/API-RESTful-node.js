@@ -2,13 +2,16 @@ extends layout
 
 block content
   div.container
+    // Cabecera
     div.row
       div.col-sm-12
         h1= title
         h1.small Posible cabecera
+    // /Cabecera
+    // Tabla
     div.row
+      // Product Info
       #productInfo.col-sm-3
-        // Product Info
         img.img-responsive.img-rounded#productInfoPath(src='/images/default.png' alt='imagen por defecto')
         p
           strong Nombre:
@@ -32,9 +35,9 @@ block content
             div.col-sm-6
               a#linkdeleteProduct(class="btn btn-danger" data-toggle='modal' href='#modalDeleteProduct' rel='')
                 <span class="glyphicon glyphicon-trash"></span>
-        // /Product Info
+      // /Product Info
+      // Product Table
       #productTable.col-sm-9
-        // Product Table
         h2 Lista de productos
         table.table.table-hover
           thead
@@ -42,95 +45,101 @@ block content
             th Categoria
             th Precio
           tbody
-        // /Product Table
-    div.row
-      // Modals
-      form#addProductForm.form-horizontal(action='/api/product', method='POST' enctype='multipart/form-data')
-        #modalSaveProduct.modal.fade(role='dialog', aria-labelledby='modalSaveProductLabel', aria-hidden='true')
-          div.modal-dialog
-            div.modal-content
-              // modal header
-              div.modal-header
-                button.close(type='button', data-dismiss='modal')
-                  <span aria-hidden='true'>&times;</span>
-                  <span class='sr-only'>Cerrar</span>
-                h4#modalSaveProductLabel.modal-title Añadir producto
-              // /modal header
-              // modal body
-              div.modal-body
-                div.form-group
-                  label.control-label.col-sm-3 Nombre:
-                  div.col-sm-9
-                    input.form-control(type='text', placeholder='Nombre del producto', name='name')
-                div.form-group
-                  label.control-label.col-sm-3 Precio:
-                  div.col-sm-9
-                    div.input-group
-                      input.form-control(type='text' aria-label='Precio' placeholder='Precio del producto', name='price')
-                      <span class='input-group-addon'>€</span>
-                div.form-group
-                  label.control-label.col-sm-3 Categoria:
-                  div.col-sm-9
-                    select.form-control(name='category')
-                      option computers
-                      option phones
-                      option accesories
-                div.form-group
-                  label.control-label.col-sm-3 Foto:
-                  div.col-sm-9
-                    input.form-control(type='file', name='archivo')
-                div.form-group
-                  label.control-label.col-sm-3 Descripción:
-                  div.col-sm-9
-                    textarea.form-control(placeholder='Breve descripción del producto' row='2', name='description')
-              // /modal body
-              // modal footer
-              div.modal-footer
-                button#btnAddProduct(class='btn btn-primary', type='submit') Añadir Producto
-                <span id = "status"></span>
-              // /modal footer
-
-      form#updateProductForm.form-horizontal(action='/api/product' method='PUT' enctype = 'multipart/form-data')
-        #modalUpdateProduct.modal.fade(role='dialog', aria-labelledby='modalUpdateProductLabel', aria-hidden='true')
-          div.modal-dialog
-            div.modal-content
-              // modal header
-              div.modal-header
-                button.close(type='button', data-dismiss='modal')
-                  <span aria-hidden='true'>&times;</span>
-                  <span class='sr-only'>Cerrar</span>
-                h4#modalUpdateProductLabel.modal-title Actualizar producto
-              // /modal header
-              // modal body
-              div.modal-body
-                div.form-group
-                  label.control-label.col-sm-3(for='productInputName') Nombre:
-                  div.col-sm-9
-                    input#productInputName.form-control(type='text', placeholder='Nombre del producto', name='name')
-                div.form-group
-                  label.control-label.col-sm-3(for='productInputPrice') Precio:
-                  div.col-sm-9
-                    div.input-group
-                      input.form-control#productInputPrice(type='text' aria-label='Precio' placeholder='Precio del producto', name='price')
-                      <span class='input-group-addon'>€</span>
-                div.form-group
-                  label.control-label.col-sm-3(for='productInputCategory') Categoria:
-                  div.col-sm-9
-                    select#productInputCategory.form-control(name='category')
-                      option(value='computers') computers
-                      option phones
-                      option accesories
-                div.form-group
-                  label.control-label.col-sm-3(for='productInputPhoto') Foto:
-                  div.col-sm-9
-                    input#productInputPhoto.form-control(type='file', name='archivo')
-                div.form-group
-                  label.control-label.col-sm-3(for='productInputDescription') Descripción:
-                  div.col-sm-9
-                    textarea#productInputDescription.form-control(placeholder='Breve descripción del producto' row='2', name='description')
-              // /modal body
-              // modal footer
-              div.modal-footer
-                button#btnUpdateProduct(class='btn btn-primary', type='submit') Actualizar Producto
-              // /modal footer
-        // /Modals
+      // /Product Table
+    // /Tabla
+    // Modals
+    // Add Product Form
+    form#addProductForm.form-horizontal(action='/api/product', method='POST' enctype='multipart/form-data')
+      #modalSaveProduct.modal.fade(role='dialog', aria-labelledby='modalSaveProductLabel', aria-hidden='true')
+        div.modal-dialog
+          div.modal-content
+            // modal header
+            div.modal-header
+              button.close(type='button', data-dismiss='modal')
+                <span aria-hidden='true'>&times;</span>
+                <span class='sr-only'>Cerrar</span>
+              h4#modalSaveProductLabel.modal-title Añadir producto
+            // /modal header
+            // modal body
+            div.modal-body
+              div.form-group
+                label.control-label.col-sm-3 Nombre:
+                div.col-sm-9
+                  input.form-control(type='text', placeholder='Nombre del producto', name='name')
+              div.form-group
+                label.control-label.col-sm-3 Precio:
+                div.col-sm-9
+                  div.input-group
+                    input.form-control(type='text' aria-label='Precio' placeholder='Precio del producto', name='price')
+                    <span class='input-group-addon'>€</span>
+              div.form-group
+                label.control-label.col-sm-3 Categoria:
+                div.col-sm-9
+                  select.form-control(name='category')
+                    option computers
+                    option phones
+                    option accesories
+              div.form-group
+                label.control-label.col-sm-3 Foto:
+                div.col-sm-9
+                  input.form-control(type='file', name='archivo')
+              div.form-group
+                label.control-label.col-sm-3 Descripción:
+                div.col-sm-9
+                  textarea.form-control(placeholder='Breve descripción del producto' row='2', name='description')
+            // /modal body
+            // modal footer
+            div.modal-footer
+              button#btnAddProduct(class='btn btn-primary', type='submit') Añadir Producto
+              <span id = "status"></span>
+            // /modal footer
+    // /Add Product Form
+    // Update Product Form
+    form#updateProductForm.form-horizontal(action='/api/product' method='PUT' enctype = 'multipart/form-data')
+      #modalUpdateProduct.modal.fade(role='dialog', aria-labelledby='modalUpdateProductLabel', aria-hidden='true')
+        div.modal-dialog
+          div.modal-content
+            // modal header
+            div.modal-header
+              button.close(type='button', data-dismiss='modal')
+                <span aria-hidden='true'>&times;</span>
+                <span class='sr-only'>Cerrar</span>
+              h4#modalUpdateProductLabel.modal-title Actualizar producto
+            // /modal header
+            // modal body
+            div.modal-body
+              div.form-group
+                label.control-label.col-sm-3(for='productInputName') Nombre:
+                div.col-sm-9
+                  input#productInputName.form-control(type='text', placeholder='Nombre del producto', name='name')
+              div.form-group
+                label.control-label.col-sm-3(for='productInputPrice') Precio:
+                div.col-sm-9
+                  div.input-group
+                    input.form-control#productInputPrice(type='text' aria-label='Precio' placeholder='Precio del producto', name='price')
+                    <span class='input-group-addon'>€</span>
+              div.form-group
+                label.control-label.col-sm-3(for='productInputCategory') Categoria:
+                div.col-sm-9
+                  select#productInputCategory.form-control(name='category')
+                    option(value='computers') computers
+                    option phones
+                    option accesories
+              div.form-group
+                label.control-label.col-sm-3(for='productInputPhoto') Foto:
+                div.col-sm-9
+                  input#productInputPhoto.form-control(type='file', name='archivo')
+              div.form-group
+                label.control-label.col-sm-3(for='productInputDescription') Descripción:
+                div.col-sm-9
+                  textarea#productInputDescription.form-control(placeholder='Breve descripción del producto' row='2', name='description')
+            // /modal body
+            // modal footer
+            div.modal-footer
+              button#btnUpdateProduct(class='btn btn-primary', type='submit') Actualizar Producto
+            // /modal footer
+      // /Modals
+    // /Update Product Form
+    script(src='/js/jquery-3.1.1.min.js')
+    script(src='/js/bootstrap.min.js')
+    script(src='/js/global.js')
