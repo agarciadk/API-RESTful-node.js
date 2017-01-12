@@ -17,6 +17,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/api', api)
 app.use('/gallery', gallery)
 
+app.get('/', (req, res) => {
+  res.end('Hello World!!!')
+})
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   var err = new Error('Not Found')
