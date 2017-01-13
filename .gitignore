@@ -1,3 +1,4 @@
-keys.json
 public/images/
 node_modules/
+npm-debug.log
+/*.env

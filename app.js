@@ -5,8 +5,9 @@ const bodyParser = require('body-parser')
 const path = require('path')
 const app = express()
 
-const api = require('./routes')
+const api = require('./routes/api')
 const gallery = require('./routes/gallery')
+const index = require('./routes')
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
@@ -14,12 +15,12 @@ app.set('view engine', 'pug')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'public')))
+
+// Routes
+app.use('/', index)
 app.use('/api', api)
 app.use('/gallery', gallery)
 
-app.get('/', (req, res) => {
-  res.status(200).send('Hello World!!!')
-})
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   var err = new Error('Not Found')
