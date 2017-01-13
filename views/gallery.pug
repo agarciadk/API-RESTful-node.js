@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  div.container
+    // Cabecera
+    div.row
+      div.col-xs-12
+        h1= title
+        h1.small Posible cabecera
+    // /Cabecera
+    // Galeria
+    div.row
+      #main_area
+        // Slider
+        div.row
+          #slider-thumbs.col-sm-6
+            // Bottom switcher of slider
+            ul.hide-bullets#carouselSelectors
+          div.col-sm-6
+            #slider.col-xs-12
+              // Top part of the slider
+              div.row
+                #carousel-bounding-box.col-sm-12
+                  #myCarousel.carousel.slide
+                    // Carousel items
+                    div.carousel-inner
+                    // Carousel nav
+                      a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                      a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+            // Slider
+    // /Galeria
+    script(src='/js/jquery-3.1.1.min.js')
+    script(src='/js/bootstrap.min.js')
+    script(src='/js/gallery.js')
