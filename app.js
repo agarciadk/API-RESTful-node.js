@@ -3,7 +3,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
-const wwwhisper = require('connect-wwwhisper')
 const app = express()
 
 const api = require('./routes/api')
@@ -16,7 +15,6 @@ app.set('view engine', 'pug')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'public')))
-app.use(wwwhisper())
 // Routes
 app.use('/', index)
 app.use('/api', api)
