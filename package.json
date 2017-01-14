@@ -25,17 +25,19 @@
     "moment": "^2.17.1",
     "mongoose": "^4.7.5",
     "multer": "^1.2.1",
-    "pug": "^2.0.0-beta6"
+    "pug": "^2.0.0-beta6",
+    "connect-wwwhisper": "*"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "standard": "^8.6.0"
   },
   "standard": {
     "globals": [
       "$",
       "alert",
       "confirm",
-      "FormData()"
+      "FormData"
     ]
   }
 }
