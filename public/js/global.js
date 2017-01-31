@@ -87,31 +87,52 @@ function deleteProduct (event) {
 
 function updateProduct (event) {
   event.preventDefault()
+  // Ocultar botón
+  $('#btnUpdateProduct').hide()
+  // Mostrar barra de progreso
+  $('#progressUpdate').show()
+
   let idToUpdate = $('#linkupdateProduct').attr('rel')
   let formData = new FormData($(this)[0])
-  $.ajax({
-    type: 'PUT',
-    url: `/api/product/${idToUpdate}`,
-    data: formData,
-    contentType: false,
-    processData: false
-  }).done(data => {
+  let xhr = new XMLHttpRequest()
+
+  xhr.open('put', `/api/product/${idToUpdate}`, true)
+
+  xhr.upload.onprogress = function (e) {
+    if (e.lengthComputable) {
+      let percentage = (e.loaded / e.total) * 100
+      percentage = percentage.toFixed(0)
+      // Actualizar barra de progreso
+      $('#pbUpdateProduct').css('width', `${percentage}%`)
+      $('#pbUpdateProduct').text(`${percentage}%`)
+      $('#pbUpdateProduct').attr('aria-valuenow', percentage)
+    }
+  }
+  xhr.onerror = function (e) {
+    // TODO: Mostrar modal de Error
+    console.log('Error')
+  }
+
+  xhr.onload = function () {
     resetForm('#updateProductForm')
     $('#modalUpdateProduct').modal('toggle')
     populateTable()
-  }).fail(data => {
-    console.log('Error')
-  })
+    // Ocultar barra de progreso
+    $('#progressUpdate').hide()
+    // Mostrar botón
+    $('#btnUpdateProduct').show()
+  }
+
+  xhr.send(formData)
 }
 
 function addProduct (event) {
-  // Añadir validación de formularios
-  console.log('File is uploading...')
+  // TODO: Añadir validación de formularios
   event.preventDefault()
-  // Mostrar barra de progreso
+  // Ocultar botón
   $('#btnAddProduct').hide()
-  $('div.progress').show()
-  console.log('Mostar barra de progreso')
+  // Mostrar barra de progreso
+  $('#progressAdd').show()
   let formData = new FormData($(this)[0])
   let xhr = new XMLHttpRequest()
 
@@ -122,26 +143,29 @@ function addProduct (event) {
       let percentage = (e.loaded / e.total) * 100
       percentage = percentage.toFixed(0)
       // Actualizar barra de progreso
-      $('#pbAddProduct').css('width', percentage + '%')
-      $('#pbAddProduct').text(percentage + '%')
+      $('#pbAddProduct').css('width', `${percentage}%`)
+      $('#pbAddProduct').text(`${percentage}%`)
       $('#pbAddProduct').attr('aria-valuenow', percentage)
-      console.log(percentage)
     }
   }
+
   xhr.onerror = function (e) {
-    // Mostrar modal de error
+    // TODO: Mostrar modal de error
     console.log('Error')
   }
+
   xhr.onload = function () {
     console.log('File is uploaded')
     resetForm('#addProductForm')
     $('#modalSaveProduct').modal('toggle')
-    $('div.progress').hide()
+    // Ocultar barra de progreso
+    $('#progressAdd').hide()
+    // Mostrar botón
     $('#btnAddProduct').show()
     populateTable()
-    // Mostrar modal de éxito
-    console.log(this.statusText)
+    // TODO: Mostrar modal de éxito console.log(this.statusText)
   }
+
   xhr.send(formData)
 }
 
