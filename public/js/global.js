@@ -120,9 +120,10 @@ function addProduct (event) {
   xhr.upload.onprogress = function (e) {
     if (e.lengthComputable) {
       let percentage = (e.loaded / e.total) * 100
+      percentage = percentage.toFixed(0)
       // Actualizar barra de progreso
       $('#pbAddProduct').css('width', percentage + '%')
-      $('#pbAddProduct').text(percentage)
+      $('#pbAddProduct').text(percentage + '%')
       $('#pbAddProduct').attr('aria-valuenow', percentage)
       console.log(percentage)
     }
