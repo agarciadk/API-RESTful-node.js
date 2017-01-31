@@ -108,23 +108,47 @@ function addProduct (event) {
   // Añadir validación de formularios
   console.log('File is uploading...')
   event.preventDefault()
+  // Mostrar barra de progreso
+  console.log('Mostar barra de progreso')
   let formData = new FormData($(this)[0])
-  console.log(`Parametro del FormData: ${$(this)[0]}`)
-  console.log(formData)
-  $.ajax({
-    type: 'POST',
-    url: '/api/product/',
-    data: formData,
-    contentType: false,
-    processData: false
-  }).done(data => {
-    console.log(`File is uploaded`)
+  // $.ajax({
+  //   type: 'POST',
+  //   url: '/api/product/',
+  //   data: formData,
+  //   contentType: false,
+  //   processData: false
+  // }).done(data => {
+  //   console.log(`File is uploaded`)
+  //   resetForm('#addProductForm')
+  //   $('#modalSaveProduct').modal('toggle')
+  //   populateTable()
+  // }).fail(data => {
+  //   console.log('Error')
+  // })
+  let xhr = new XMLHttpRequest()
+
+  xhr.open('post', '/api/product', true)
+
+  xhr.upload.onprogress = function (e) {
+    if (e.lengthComputable) {
+      let percentage = (e.loaded / e.total) * 100
+      // Actualizar barra de progreso
+      console.log(percentage)
+    }
+  }
+  xhr.onerror = function (e) {
+    // Mostrar modal de error
+    console.log('Error')
+  }
+  xhr.onload = function () {
+    console.log('File is uploaded')
     resetForm('#addProductForm')
     $('#modalSaveProduct').modal('toggle')
     populateTable()
-  }).fail(data => {
-    console.log('Error')
-  })
+    // Mostrar modal de éxito
+    console.log(this.statusText)
+  }
+  xhr.send(formData)
 }
 
 function resetForm (idForm) {
