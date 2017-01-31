@@ -93,9 +93,8 @@ block content
             div.modal-footer
               button#btnAddProduct(class='btn btn-primary', type='submit') Añadir Producto
               <span id = "status"></span>
-              .span12
-                div.progress.progress-striped.active.hide(style='display: none;')
-                  .bar(style='width: 100%')
+              .progress.hide
+                #pbAddProduct.progress-bar.progress-bar-striped.active(role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 0%") 0%
             // /modal footer
     // /Add Product Form
     // Update Product Form

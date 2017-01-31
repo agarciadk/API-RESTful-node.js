@@ -109,6 +109,7 @@ function addProduct (event) {
   console.log('File is uploading...')
   event.preventDefault()
   // Mostrar barra de progreso
+  $('#btnAddProduct').hide()
   $('div.progress').show()
   console.log('Mostar barra de progreso')
   let formData = new FormData($(this)[0])
@@ -120,7 +121,9 @@ function addProduct (event) {
     if (e.lengthComputable) {
       let percentage = (e.loaded / e.total) * 100
       // Actualizar barra de progreso
-      $('div.progress div.bar').css('width', percentage + '%')
+      $('#pbAddProduct').css('width', percentage + '%')
+      $('#pbAddProduct').text(percentage)
+      $('#pbAddProduct').attr('aria-valuenow', percentage)
       console.log(percentage)
     }
   }
@@ -132,6 +135,8 @@ function addProduct (event) {
     console.log('File is uploaded')
     resetForm('#addProductForm')
     $('#modalSaveProduct').modal('toggle')
+    $('div.progress').hide()
+    $('#btnAddProduct').show()
     populateTable()
     // Mostrar modal de éxito
     console.log(this.statusText)
