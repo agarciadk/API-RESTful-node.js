@@ -5,7 +5,7 @@ const express = require('express')
 const index = express.Router()
 
 index.get('/', (req, res) => {
-  res.status(200).send('Hello World!!!')
+  res.status(302).redirect('/api')
 })
 
 module.exports = index

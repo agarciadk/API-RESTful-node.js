@@ -86,6 +86,7 @@ function deleteProduct (req, res) {
     })
     product.remove(err => {
       if (err) res.status(500).send({message: `Error al borrar el producto: ${err}`})
+
       res.status(200).send({message: 'El producto ha sido eliminado'})
     })
   })
