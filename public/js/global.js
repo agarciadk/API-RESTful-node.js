@@ -103,9 +103,7 @@ function updateProduct (event) {
       let percentage = (e.loaded / e.total) * 100
       percentage = percentage.toFixed(0)
       // Actualizar barra de progreso
-      $('#pbUpdateProduct').css('width', `${percentage}%`)
-      $('#pbUpdateProduct').text(`${percentage}%`)
-      $('#pbUpdateProduct').attr('aria-valuenow', percentage)
+      setPercentage('#pbUpdateProduct', percentage)
     }
   }
   xhr.onerror = function (e) {
@@ -119,6 +117,8 @@ function updateProduct (event) {
     populateTable()
     // Ocultar barra de progreso
     $('#progressUpdate').hide()
+    // Establecer el % a 0
+    setPercentage('#pbUpdateProduct', 0)
     // Mostrar botón
     $('#btnUpdateProduct').show()
   }
@@ -143,9 +143,7 @@ function addProduct (event) {
       let percentage = (e.loaded / e.total) * 100
       percentage = percentage.toFixed(0)
       // Actualizar barra de progreso
-      $('#pbAddProduct').css('width', `${percentage}%`)
-      $('#pbAddProduct').text(`${percentage}%`)
-      $('#pbAddProduct').attr('aria-valuenow', percentage)
+      setPercentage('#pbAddProduct', percentage)
     }
   }
 
@@ -160,6 +158,8 @@ function addProduct (event) {
     $('#modalSaveProduct').modal('toggle')
     // Ocultar barra de progreso
     $('#progressAdd').hide()
+    // Establecer el % a 0
+    setPercentage('#pbAddProduct', 0)
     // Mostrar botón
     $('#btnAddProduct').show()
     populateTable()
@@ -179,4 +179,10 @@ function resetForm (idForm) {
   if ($(`${idForm} select`) !== undefined) {
     $(`${idForm} select`).prop('selectedIndex', 0)
   } else { console.log(`No hay select`) }
+}
+
+function setPercentage (idPb, percentage) {
+  $(idPb).css('width', `${percentage}%`)
+  $(idPb).text(`${percentage}%`)
+  $(idPb).attr('aria-valuenow', percentage)
 }
