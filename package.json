@@ -36,7 +36,8 @@
       "$",
       "alert",
       "confirm",
-      "FormData"
+      "FormData",
+      "XMLHttpRequest"
     ]
   }
 }

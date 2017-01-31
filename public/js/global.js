@@ -109,22 +109,9 @@ function addProduct (event) {
   console.log('File is uploading...')
   event.preventDefault()
   // Mostrar barra de progreso
+  $('div.progress').show()
   console.log('Mostar barra de progreso')
   let formData = new FormData($(this)[0])
-  // $.ajax({
-  //   type: 'POST',
-  //   url: '/api/product/',
-  //   data: formData,
-  //   contentType: false,
-  //   processData: false
-  // }).done(data => {
-  //   console.log(`File is uploaded`)
-  //   resetForm('#addProductForm')
-  //   $('#modalSaveProduct').modal('toggle')
-  //   populateTable()
-  // }).fail(data => {
-  //   console.log('Error')
-  // })
   let xhr = new XMLHttpRequest()
 
   xhr.open('post', '/api/product', true)
@@ -133,6 +120,7 @@ function addProduct (event) {
     if (e.lengthComputable) {
       let percentage = (e.loaded / e.total) * 100
       // Actualizar barra de progreso
+      $('div.progress div.bar').css('width', percentage + '%')
       console.log(percentage)
     }
   }
