@@ -59,14 +59,15 @@ function updateProduct (req, res) {
     Product.findById(productId, (err, product) => {
       if (err) res.status(404).send({message: 'Producto no encontrado.'})
       let imageToDelete = product.picture
-      fs.unlink(`./public/images/${imageToDelete}`, (err) => {
-        if (err) res.status(500).send({message: `Error al borrar la imagen: ${err}`})
-
-        console.log(`Imagen ${imageToDelete} borrada con exito`)
+      fs.unlink(`./public/images/${imageToDelete}`, err => {
+        if (err) {
+          /* Imagen no existe */
+          if (err.code === 'ENOENT') return
+          else { throw err }
+        } else { console.log(`Imagen ${imageToDelete} borrada con exito`) }
       })
     })
   }
-  console.log(`update: ${JSON.stringify(update)}`)
   Product.findByIdAndUpdate(productId, update, (err, productUpdate) => {
     if (err) res.status(500).send({message: `Error al actualizar el producto: ${err}`})
 
@@ -79,10 +80,11 @@ function deleteProduct (req, res) {
   Product.findById(productId, (err, product) => {
     if (err) res.status(404).send({message: 'Producto no encontrado.'})
     let imageToDelete = product.picture
-    fs.unlink(`./public/images/${imageToDelete}`, (err) => {
-      if (err) res.status(500).send({message: `Error al borrar la imagen: ${err}`})
-
-      console.log(`Imagen ${imageToDelete} borrada con exito`)
+    fs.unlink(`./public/images/${imageToDelete}`, err => {
+      if (err) {
+        if (err.code === 'ENOENT') return
+        else { throw err }
+      } else { console.log(`Imagen ${imageToDelete} borrada con exito`) }
     })
     product.remove(err => {
       if (err) res.status(500).send({message: `Error al borrar el producto: ${err}`})
