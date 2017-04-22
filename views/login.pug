@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  div.container
+    // Cabecera
+    div.row
+      div.col-sm-12.page-header
+        h1= title
+          small  Posible cabecera
+    // /Cabecera
+    .container
+      .row
+        .col-sm-5.col-sm-offset-2
+          // Form login
+          form#loginForm.login-form(action='/login/signIn', method='POST')
+            .input-group
+              <span class='input-group-addon'>
+                <span class="glyphicon glyphicon-user"></span>
+              </span>
+              input.form-control(type='text' placeholder='Nombre de usuario', name='username')
+            .input-group
+              <span class='input-group-addon'>
+                <span class="glyphicon glyphicon-lock"></span>
+              </span>
+              input.form-control(type='password' placeholder='Contraseña', name='password')
+            button(class='btn btn-primary col-sm-offset-10', type='submit') Entrar
+          // /Form login
+    script(src='/js/jquery-3.1.1.min.js')
+    script(src='/js/bootstrap.min.js')
+    script(src='/js/global.js')
