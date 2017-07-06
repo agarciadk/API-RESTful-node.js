@@ -1,3 +1,7 @@
 node_modules/
 npm-debug.log
 /*.env
+public/css/
+public/images/
+public/js/bootstrap.js
+public/js/npm.js
