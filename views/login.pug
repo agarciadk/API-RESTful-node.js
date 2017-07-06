@@ -12,12 +12,12 @@ block content
       .row
         .col-sm-5.col-sm-offset-2
           // Form login
-          form#loginForm.login-form(action='/login/signIn', method='POST')
+          form#loginForm.login-form(action='signIn', method='POST')
             .input-group
               <span class='input-group-addon'>
                 <span class="glyphicon glyphicon-user"></span>
               </span>
-              input.form-control(type='text' placeholder='Nombre de usuario', name='username')
+              input.form-control(type='text' placeholder='Email', name='email')
             .input-group
               <span class='input-group-addon'>
                 <span class="glyphicon glyphicon-lock"></span>

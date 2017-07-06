@@ -11,6 +11,7 @@ function isAuth (req, res, next) {
   */
   if (!req.headers.authorization) {
     // Si no existe enviamos un error 403 de No autorizado
+    console.log('#error No existe cabecera authorization')
     return res.status(403).send({message: 'No tienes autorización.'})
   } else { // En el caso de que si exista esta cabecera
     const token = req.headers.authorization.split(' ')[1]
@@ -21,7 +22,7 @@ function isAuth (req, res, next) {
         next()
       })
       .catch(response => {
-        res.status(response.status)
+        res.status(response.status).send({message: 'Token erroneo'})
       })
   }
 }
