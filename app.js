@@ -3,23 +3,23 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
+
 const app = express()
 
+const index = require('./routes')
 const api = require('./routes/api')
 const gallery = require('./routes/gallery')
-const index = require('./routes')
-const login = require('./routes/login')
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Routes
 app.use('/', index)
-app.use('/login', login)
+app.use('/signin', api)
 app.use('/api', api)
 app.use('/gallery', gallery)
 

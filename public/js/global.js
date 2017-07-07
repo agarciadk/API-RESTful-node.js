@@ -5,6 +5,8 @@ var userInfo = false
 // DOM Ready =============================================================
 $(document).ready(() => {
   // Populate the user table on initial page load
+  $('li[class="active"]').toggleClass()
+  $('a[href="/api/"]').parent().addClass('active')
   populateTable()
   // Username link click
   $('#productTable table tbody').on('click', 'td a.linkshowProduct', showProductInfo)
@@ -20,8 +22,14 @@ $(document).ready(() => {
 function populateTable () {
   // Empty content string
   let tableContent = ''
-  // jQuery AJAX call for JSON
-  $.getJSON('/api/product', data => {
+  const myHeaders = new Headers()
+  myHeaders.append('authorization', `Bearer ${localStorage.token}`)
+  fetch('/api/product', {
+    method: 'GET',
+    headers: myHeaders
+  })
+  .then(res => res.json())
+  .then(data => {
     // Stick our product data array into a productlist variable in the global object
     productListData = data
 
@@ -72,10 +80,13 @@ function deleteProduct (event) {
   // Check and make sure the user confirmed
   if (confirmation === true) {
     // If the did, do our delete
-    $.ajax({
-      type: 'DELETE',
-      url: '/api/product/' + $(this).attr('rel')
-    }).done(response => {
+    const myHeaders = new Headers()
+    myHeaders.append('authorization', `Bearer ${localStorage.token}`)
+    fetch('/api/product/' + $(this).attr('rel'), {
+      method: 'DELETE',
+      headers: myHeaders
+    })
+    .then(response => {
       // Check for a successfull (blank) response
       if (response.msg === undefined) {} else alert('Error: ' + response.msg)
 
@@ -97,7 +108,7 @@ function updateProduct (event) {
   let xhr = new XMLHttpRequest()
 
   xhr.open('put', `/api/product/${idToUpdate}`, true)
-
+  xhr.setRequestHeader('authorization',`Bearer ${localStorage.token}`)
   xhr.upload.onprogress = function (e) {
     if (e.lengthComputable) {
       let percentage = (e.loaded / e.total) * 100
@@ -137,7 +148,7 @@ function addProduct (event) {
   let xhr = new XMLHttpRequest()
 
   xhr.open('post', '/api/product', true)
-
+  xhr.setRequestHeader('authorization',`Bearer ${localStorage.token}`)
   xhr.upload.onprogress = function (e) {
     if (e.lengthComputable) {
       let percentage = (e.loaded / e.total) * 100

@@ -5,6 +5,7 @@ const Product = require('../models/product')
 const fs = require('fs')
 
 function getIndex (req, res) {
+  console.log('por aqui no pasa')
   res.render('index', { title: 'Panel de control' })
 }
 
