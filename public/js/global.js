@@ -5,6 +5,8 @@ var userInfo = false
 // DOM Ready =============================================================
 $(document).ready(() => {
   // Populate the user table on initial page load
+  $('#loginButton').toggle()
+  $('#controlPanelButton').toggle()
   $('li[class="active"]').toggleClass()
   $('a[href="/api/"]').parent().addClass('active')
   populateTable()
@@ -15,6 +17,7 @@ $(document).ready(() => {
   // Add Product button click
   $('#addProductForm').submit(addProduct)
   $('#updateProductForm').submit(updateProduct)
+  $('#logout').click(logout)
 })
 
 // Functions
@@ -196,4 +199,10 @@ function setPercentage (idPb, percentage) {
   $(idPb).css('width', `${percentage}%`)
   $(idPb).text(`${percentage}%`)
   $(idPb).attr('aria-valuenow', percentage)
+}
+function logout(e){
+  e.preventDefault()
+
+  localStorage.clear()
+  location.href='/'
 }

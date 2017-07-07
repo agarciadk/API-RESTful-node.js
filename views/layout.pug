@@ -19,10 +19,10 @@ html
         // Collect the nav links, forms, and other content for toggling
         #bs-example-navbar-collapse-1.collapse.navbar-collapse
           ul.nav.navbar-nav
-            li.active
+            li#loginButton.active
               a(href='/api/signin') Login
                 <span class="sr-only">(current)</span>
-            li
+            li#controlPanelButton.display-hide(style='display:none')
               a(href='/api/') Panel de control
             li
               a(href='/gallery/') Galeria
@@ -53,6 +53,6 @@ html
                   a(href='#') Contacto
                 li.divider(role='separator')
                 li
-                  a(href='#') Salir
+                  a#logout(href='#') Salir
 
     block content
